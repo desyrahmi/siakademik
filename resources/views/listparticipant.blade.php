@@ -11,7 +11,8 @@
             </h1>
             <ol class="breadcrumb">
                 <li><a href="{{route('index')}}"><i class="fa fa-dashboard"></i> Home</a></li>
-                <li class="active">List Mahasiswa</li>
+                <li><a href="{{route('index.room')}}"></i> List Kelas</a></li>
+                <li class="active">List Peserta</li>
             </ol>
         </section>
 
@@ -42,8 +43,8 @@
                                         <td>{{$participant->mid_exam_result}}</td>
                                         <td>{{$participant->final_exam_result}}</td>
                                         <td class="text-center">
-                                            <a href="" class="btn btn-default" style="margin-right: 10px"><i class="fa fa-edit"></i>&nbsp;Update</a>&nbsp;
-                                            <a href="" class="btn btn-danger"><i class="fa fa-trash-o"></i>&nbsp;Delete</a>
+                                            <a href="{{route('participant.edit.form', ['id' => $participant->id])}}" class="btn btn-default" style="margin-right: 10px"><i class="fa fa-edit"></i>&nbsp;Update</a>&nbsp;
+                                            <a href="{{route('participant.delete', ['id' => $participant->id])}}" class="btn btn-danger"><i class="fa fa-trash-o"></i>&nbsp;Delete</a>
                                         </td>
                                     </tr>
                                     @endforeach

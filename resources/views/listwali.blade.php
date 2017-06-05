@@ -11,6 +11,7 @@
             </h1>
             <ol class="breadcrumb">
                 <li><a href="{{route('index')}}"><i class="fa fa-dashboard"></i> Home</a></li>
+                <li><a href="{{route('index.dosen')}}"> List Dosen</a></li>
                 <li class="active">List Anak Wali</li>
             </ol>
         </section>
@@ -37,8 +38,7 @@
                                         <td>{{$student->username}}</td>
                                         <td>{{$student->name}}</td>
                                         <td class="text-center">
-                                            <a href="" class="btn btn-default" style="margin-right: 10px"><i class="fa fa-edit"></i>&nbsp;Update</a>&nbsp;
-                                            <a href="" class="btn btn-danger"><i class="fa fa-trash-o"></i>&nbsp;Delete</a>
+                                            <a href="{{route('user.edit.form', ['username' => $student->username])}}" class="btn btn-default" style="margin-right: 10px"><i class="fa fa-edit"></i>&nbsp;Update</a>&nbsp;
                                         </td>
                                     </tr>
                                     @endforeach

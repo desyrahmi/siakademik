@@ -76,111 +76,111 @@
                     </div>
                 @endif
             </div>
-            {{--<div class="row">--}}
-            {{--<section class="col-lg-11 connectedSortable">--}}
-            {{--<div class="box box-primary">--}}
-            {{--<div class="box-header">--}}
-            {{--<i class="fa fa-user"></i>--}}
-            {{--<h3 class="box-title">To Do List</h3>--}}
-            {{--<div class="box-tools pull-right">--}}
-            {{--<ul class="pagination pagination-sm inline">--}}
-            {{--<li><a href="#">&laquo;</a></li>--}}
-            {{--<li><a href="#">1</a></li>--}}
-            {{--<li><a href="#">2</a></li>--}}
-            {{--<li><a href="#">3</a></li>--}}
-            {{--<li><a href="#">&raquo;</a></li>--}}
-            {{--</ul>--}}
-            {{--</div>--}}
-            {{--</div>--}}
-            {{--<div class="box-body">--}}
-            {{--<ul class="todo-list">--}}
-            {{--<li>--}}
-            {{--<!-- drag handle -->--}}
-            {{--<span class="handle">--}}
-            {{--<i class="fa fa-ellipsis-v"></i>--}}
-            {{--<i class="fa fa-ellipsis-v"></i>--}}
-            {{--</span>--}}
-            {{--<input type="checkbox" value="">--}}
-            {{--<span class="text">Design a nice theme</span>--}}
-            {{--<small class="label label-danger"><i class="fa fa-clock-o"></i> 2 mins</small>--}}
-            {{--<div class="tools">--}}
-            {{--<i class="fa fa-edit"></i>--}}
-            {{--<i class="fa fa-trash-o"></i>--}}
-            {{--</div>--}}
-            {{--</li>--}}
-            {{--<li>--}}
-            {{--<span class="handle">--}}
-            {{--<i class="fa fa-ellipsis-v"></i>--}}
-            {{--<i class="fa fa-ellipsis-v"></i>--}}
-            {{--</span>--}}
-            {{--<input type="checkbox" value="">--}}
-            {{--<span class="text">Make the theme responsive</span>--}}
-            {{--<small class="label label-info"><i class="fa fa-clock-o"></i> 4 hours</small>--}}
-            {{--<div class="tools">--}}
-            {{--<i class="fa fa-edit"></i>--}}
-            {{--<i class="fa fa-trash-o"></i>--}}
-            {{--</div>--}}
-            {{--</li>--}}
-            {{--<li>--}}
-            {{--<span class="handle">--}}
-            {{--<i class="fa fa-ellipsis-v"></i>--}}
-            {{--<i class="fa fa-ellipsis-v"></i>--}}
-            {{--</span>--}}
-            {{--<input type="checkbox" value="">--}}
-            {{--<span class="text">Let theme shine like a star</span>--}}
-            {{--<small class="label label-warning"><i class="fa fa-clock-o"></i> 1 day</small>--}}
-            {{--<div class="tools">--}}
-            {{--<i class="fa fa-edit"></i>--}}
-            {{--<i class="fa fa-trash-o"></i>--}}
-            {{--</div>--}}
-            {{--</li>--}}
-            {{--<li>--}}
-            {{--<span class="handle">--}}
-            {{--<i class="fa fa-ellipsis-v"></i>--}}
-            {{--<i class="fa fa-ellipsis-v"></i>--}}
-            {{--</span>--}}
-            {{--<input type="checkbox" value="">--}}
-            {{--<span class="text">Let theme shine like a star</span>--}}
-            {{--<small class="label label-success"><i class="fa fa-clock-o"></i> 3 days</small>--}}
-            {{--<div class="tools">--}}
-            {{--<i class="fa fa-edit"></i>--}}
-            {{--<i class="fa fa-trash-o"></i>--}}
-            {{--</div>--}}
-            {{--</li>--}}
-            {{--<li>--}}
-            {{--<span class="handle">--}}
-            {{--<i class="fa fa-ellipsis-v"></i>--}}
-            {{--<i class="fa fa-ellipsis-v"></i>--}}
-            {{--</span>--}}
-            {{--<input type="checkbox" value="">--}}
-            {{--<span class="text">Check your messages and notifications</span>--}}
-            {{--<small class="label label-primary"><i class="fa fa-clock-o"></i> 1 week</small>--}}
-            {{--<div class="tools">--}}
-            {{--<i class="fa fa-edit"></i>--}}
-            {{--<i class="fa fa-trash-o"></i>--}}
-            {{--</div>--}}
-            {{--</li>--}}
-            {{--<li>--}}
-            {{--<span class="handle">--}}
-            {{--<i class="fa fa-ellipsis-v"></i>--}}
-            {{--<i class="fa fa-ellipsis-v"></i>--}}
-            {{--</span>--}}
-            {{--<input type="checkbox" value="">--}}
-            {{--<span class="text">Let theme shine like a star</span>--}}
-            {{--<small class="label label-default"><i class="fa fa-clock-o"></i> 1 month</small>--}}
-            {{--<div class="tools">--}}
-            {{--<i class="fa fa-edit"></i>--}}
-            {{--<i class="fa fa-trash-o"></i>--}}
-            {{--</div>--}}
-            {{--</li>--}}
-            {{--</ul>--}}
-            {{--</div>--}}
-            {{--<div class="box-footer clearfix no-border">--}}
-            {{--<button type="button" class="btn btn-default pull-right"><i class="fa fa-plus"></i> Add item</button>--}}
-            {{--</div>--}}
-            {{--</div>--}}
-            {{--</section>--}}
-            {{--</div>--}}
+            <div class="row">
+                <section class="col-lg-6 connectedSortable">
+                    <div class="box box-primary">
+                        <div class="box-header">
+                            <i class="fa fa-file-o"></i>
+                            @if(Auth::user()->role == 'mahasiswa')
+                                <h3 class="box-title">Profil Mahasiswa</h3>
+                            @elseif(Auth::user()->role == 'dosen')
+                                <h3 class="box-title">Profil Dosen</h3>
+                            @endif
+                        </div>
+                        <div class="box-body">
+                            <h3 class="profile-username text-center">{{Auth::user()->name}}</h3>
+                            <ul class="list-group list-group-unbordered">
+                                @if(Auth::user()->role == 'mahasiswa')
+                                    <li class="list-group-item">
+                                        <b>NRP</b> <p class="pull-right">{{Auth::user()->username}}</p>
+                                    </li>
+                                    <li class="list-group-item">
+                                        <b>Dosen Wali</b> <p class="pull-right">{{Auth::user()->parent->name}}</p>
+                                    </li>
+                                @elseif(Auth::user()->role == 'dosen')
+                                    <li class="list-group-item">
+                                        <b>NIP</b> <p class="pull-right">{{Auth::user()->username}}</p>
+                                    </li>
+                                @endif
+                            </ul>
+                            <a href="{{route('profile.edit.form', ['username' => Auth::user()->username])}}" class="btn btn-primary"><b>Update Profile</b></a>
+                        </div>
+                    </div>
+                </section>
+                @if(Auth::user()->role == 'mahasiswa')
+                    <section class="col-lg-6 connectedSortable">
+                        <div class="box box-primary">
+                            <div class="box-header">
+                                <i class="fa fa-file-o"></i>
+                                <h3 class="box-title">List Mata Kuliah</h3>
+                            </div>
+                            <div class="box-body">
+                                <ul class="todo-list">
+                                    @foreach($participants as $participant)
+                                        <li>
+                                            <span class="handle">
+                                                <i class="fa fa-ellipsis-v"></i>
+                                                <i class="fa fa-ellipsis-v"></i>
+                                                <span class="text">{{$participant->room->subject->name}}&nbsp;{{$participant->room->code}}&nbsp;&nbsp;&nbsp;{{$participant->room->lecturer->name}}</span>
+                                            </span>
+                                        </li>
+                                    @endforeach
+                                </ul>
+                            </div>
+                        </div>
+                    </section>
+                @endif
+                @if(Auth::user()->role == 'dosen')
+                    <section class="col-lg-6 connectedSortable">
+                        <div class="box box-primary">
+                            <div class="box-header">
+                                <i class="fa fa-file-o"></i>
+                                <h3 class="box-title">List Mata Kuliah</h3>
+                            </div>
+                            <div class="box-body">
+                                <ul class="todo-list">
+                                    @foreach($classes as $class)
+                                        <li>
+                                            <span class="handle">
+                                                <i class="fa fa-ellipsis-v"></i>
+                                                <i class="fa fa-ellipsis-v"></i>
+                                            </span>
+                                            <span class="text">{{$class->subject->name}}&nbsp;{{$class->code}}</span>
+                                            <div class="tools">
+                                                <a href="{{route('index.participant', ['id' => $class->id])}}"><i class="fa fa-edit"></i></a>
+                                            </div>
+                                        </li>
+                                    @endforeach
+                                </ul>
+                            </div>
+                        </div>
+                    </section>
+                    <section class="col-lg-6 connectedSortable">
+                        <div class="box box-primary">
+                            <div class="box-header">
+                                <i class="fa fa-file-o"></i>
+                                <h3 class="box-title">List Anak Wali</h3>
+                            </div>
+                            <div class="box-body">
+                                <ul class="todo-list">
+                                    @foreach($guards as $guard)
+                                        <li>
+                                            <span class="handle">
+                                                <i class="fa fa-ellipsis-v"></i>
+                                                <i class="fa fa-ellipsis-v"></i>
+                                            </span>
+                                            <span class="text">{{$guard->username}}&nbsp;{{$guard->name}}</span>
+                                            <div class="tools">
+                                                <a href="{{route('detail.wali', ['id' => $guard->id])}}"><i class="fa fa-edit"></i></a>
+                                            </div>
+                                        </li>
+                                    @endforeach
+                                </ul>
+                            </div>
+                        </div>
+                    </section>
+                @endif
+            </div>
         </section>
     </div>
 @endsection

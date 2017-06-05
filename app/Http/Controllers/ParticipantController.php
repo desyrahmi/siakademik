@@ -44,4 +44,25 @@ class ParticipantController extends Controller
             return redirect()->route('participant.add.index');
         }
     }
+
+    public function showEditForm($id){
+        $participant = Participant::where('id', $id)->first();
+        return view('form.updateparticipant', ['participant' => $participant]);
+    }
+
+    public function update(Request $request){
+        $fields = array('mid_exam_result', 'final_exam_result');
+        $participant = Participant::where('id', '=', $request->id)->first();
+        forEach($fields as $field) {
+            $participant[$field] = $request[$field];
+        }
+        $participant->save();
+        return redirect()->route('participant.edit.form', ['id' => $participant['id']]);
+    }
+
+    public function delete($id){
+        $participant = Participant::find($id);
+        $participant->delete();
+        return redirect()->route('index.participant', ['id' => $participant->room_id]);
+    }
 }

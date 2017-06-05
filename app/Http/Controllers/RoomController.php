@@ -43,4 +43,26 @@ class RoomController extends Controller
             }
         }
     }
+
+    public function showEditForm($id){
+        $room = Room::with('subject')->with('lecturer')->where('id', $id)->first();
+        $lecturers = User::where('role', '=', 'dosen')->get();
+        return view('form.updateroom', ['room' => $room, 'lecturers' => $lecturers]);
+    }
+
+    public function update(Request $request){
+        $fields = array('code', 'lecturer_id');
+        $room = Room::where('id', '=', $request->id)->first();
+        forEach($fields as $field) {
+            $room[$field] = $request[$field];
+        }
+        $room->save();
+        return redirect()->route('room.edit.form', ['id' => $room['id']]);
+    }
+
+    public function delete($id){
+        $room = Room::find($id);
+        $room->delete();
+        return redirect()->route('index.room');
+    }
 }

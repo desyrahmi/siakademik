@@ -46,4 +46,25 @@ class SubjectController extends Controller
             }
         }
     }
+
+    public function showEditForm($id){
+        $subject = Subject::where('id', $id)->first();
+        return view('form.updatesubject', ['subject' => $subject]);
+    }
+
+    public function update(Request $request){
+        $fields = array('code', 'name', 'credit');
+        $subject= Subject::where('id', '=', $request->id)->first();
+        forEach($fields as $field) {
+            $subject[$field] = $request[$field];
+        }
+        $subject->save();
+        return redirect()->route('subject.edit.form', ['id' => $subject['id']]);
+    }
+
+    public function delete($id){
+        $subject = Subject::find($id);
+        $subject->delete();
+        return redirect()->route('index.subject');
+    }
 }

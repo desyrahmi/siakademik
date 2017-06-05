@@ -60,7 +60,11 @@ class UserController extends Controller
                     $user->guardian_id = $request->guardian_id;
                 }
                 if($user->save()){
-                    return redirect()->route('index');
+                    if ($user->role == 'dosen') {
+                        return redirect()->route('index.dosen');
+                    } elseif ($user->role == 'mahasiswa') {
+                        return redirect()->route('index.mahasiswa');
+                    }
                 } else {
                     return redirect()->route('user.add.index');
                 }
@@ -90,8 +94,68 @@ class UserController extends Controller
         return view('form.updateuser', ['user' => $user, 'guardians' => $guardians]);
     }
 
+    public function showEditPassword($username){
+        $user = User::where('username', '=', $username)->first();
+        return view('form.updatepassword', ['user' => $user]);
+    }
+
+    public function updatePassword(Request $request){
+        $rules = array(
+            'password' => 'required',
+            'retypepassword' => 'required',
+            'oldpassword' => 'required'
+        );
+        return dd($request);
+        $validator = Validator::make($request->all(), $rules);
+        $user = User::where('username', '=', $request->username)->first();
+        if($validator->fails()) {
+            return dd('validator');
+            Session::flash('fail', 'Kolom tidak boleh kosong');
+            return redirect()->route('user.edit.password', ['username' => $request->username]);
+        } else {
+            if($request->retypepassword != $request->password){
+                return dd('gak cocok');
+                Session::flash('fail', 'Password tidak cocok');
+                return redirect()->route('user.edit.password', ['username' => $request->username]);
+            } else {
+                if(bcrypt($request->oldpassword) != $user->password) {
+                    return dd('gak ada di db');
+                    Session::flash('fail', 'Password salah');
+                    return redirect()->route('user.edit.password', ['username' => $request->username]);
+                } else {
+                    return dd('bener');
+                    $user->password = bcrypt($request->password);
+                    $user->save();
+                    return redirect()->route('profile.update.form', ['username' => $request->username]);
+                }
+            }
+        }
+    }
+
     public function update(Request $request){
-        $fields = array('username', 'name', 'password', 'role', 'guardian_id');
+        $fields = array('username', 'name', 'password', 'guardian_id');
+        $user = User::where('username', '=', $request->username)->first();
+        forEach($fields as $field) {
+            if ($field === 'password') {
+                // exceptional for password
+                $user[$field] = bcrypt($request[$field]);
+            } else  {
+                $user[$field] = $request[$field];
+            }
+        }
+        $user->save();
+        return redirect()->route('user.edit.form', ['username' => $user['username']]);
+
+    }
+
+    public function showUpdateForm($username){
+        $user = User::with('parent')->where('username', '=', $username)->first();
+        $guardians = User::where('role', '=', 'dosen')->get();
+        return view('form.updateprofile', ['user' => $user, 'guardians' => $guardians]);
+    }
+
+    public function updateProfile(Request $request){
+        $fields = array('username', 'name', 'password', 'guardian_id');
         $user = User::where('username', '=', $request->username)->first();
         forEach($fields as $field) {
             if ($request[$field]) {
@@ -104,6 +168,6 @@ class UserController extends Controller
             }
         }
         $user->save();
-        return redirect()->route('user.edit.form', ['username' => $user['username']]);
+        return redirect()->route('profile.edit.form', ['username' => $user['username']]);
     }
 }

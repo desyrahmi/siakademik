@@ -48,9 +48,6 @@
                             <li class="user-body">
                             </li>
                             <li class="user-footer">
-                                <div class="pull-left">
-                                    <a href="#" class="btn btn-default btn-flat">Profile</a>
-                                </div>
                                 <div class="pull-right">
                                     <a href="{{route('logout')}}" class="btn btn-default btn-flat">Sign out</a>
                                 </div>
@@ -64,14 +61,11 @@
     <aside class="main-sidebar">
         <section class="sidebar">
             <div class="user-panel">
-                <div class="pull-left image">
-                    <img src="" class="img-circle">
-                </div>
                 <div class="pull-left info">
                     <p>{{Auth::user()->name}}</p>
                 </div>
+                <br><br>
             </div>
-            <br>
             <ul class="sidebar-menu">
                 <li class="header">MAIN NAVIGATION</li>
                 @if(Auth::user()->role=='mahasiswa')
@@ -84,7 +78,6 @@
                         </a>
                         <ul class="treeview-menu">
                             <li class="active"><a href="{{route('index')}}"><i class="fa fa-angle-right"></i> Dashboard</a></li>
-                            <li><a href="#"><i class="fa fa-angle-right"></i> Profile</a></li>
                         </ul>
                     </li>
                 @elseif(Auth::user()->role=='dosen')
@@ -97,7 +90,6 @@
                         </a>
                         <ul class="treeview-menu">
                             <li class="active"><a href="{{route('index')}}"><i class="fa fa-angle-right"></i> Dashboard</a></li>
-                            <li><a href="#"><i class="fa fa-angle-right"></i> Profile</a></li>
                         </ul>
                     </li>
                     <li class="treeview">

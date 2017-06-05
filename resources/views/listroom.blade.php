@@ -11,7 +11,7 @@
             </h1>
             <ol class="breadcrumb">
                 <li><a href="{{route('index')}}"><i class="fa fa-dashboard"></i> Home</a></li>
-                <li class="active">List Mata Kuliah</li>
+                <li class="active">List Kelas</li>
             </ol>
         </section>
 
@@ -20,7 +20,7 @@
                 <div class="col-xs-12">
                     <div class="box">
                         <div class="box-header">
-                            <h3 class="box-title">Data Mata Kuliah</h3>
+                            <h3 class="box-title">Data Kelas</h3>
                             <a class="btn btn-default pull-right" href="{{route('room.add.index')}}"><i class="fa fa-plus"></i> Tambah Kelas</a>                        </div>
                         <div class="box-body">
                             <table class="table table-bordered table-striped">
@@ -42,8 +42,8 @@
                                         <td>{{$room->lecturer->name}}</td>
                                         <td class="text-center">
                                             <a href="{{route('index.participant', ['id' => $room->id])}}" class="btn btn-default" style="margin-right: 10px"><i class="fa fa-edit"></i>&nbsp;Daftar Peserta</a>&nbsp;
-                                            <a href="" class="btn btn-default" style="margin-right: 10px"><i class="fa fa-edit"></i>&nbsp;Update</a>&nbsp;
-                                            <a href="" class="btn btn-danger"><i class="fa fa-trash-o"></i>&nbsp;Delete</a>
+                                            <a href="{{route('room.edit.form', ['id' => $room->id])}}" class="btn btn-default" style="margin-right: 10px"><i class="fa fa-edit"></i>&nbsp;Update</a>&nbsp;
+                                            <a href="{{route('room.delete', ['id' => $room->id])}}" class="btn btn-danger"><i class="fa fa-trash-o"></i>&nbsp;Delete</a>
                                         </td>
                                     </tr>
                                     @endforeach

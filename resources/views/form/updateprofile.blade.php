@@ -11,13 +11,7 @@
             </h1>
             <ol class="breadcrumb">
                 <li><a href="{{route('index')}}"><i class="fa fa-dashboard"></i> Home</a></li>
-                @if($user->role == 'dosen')
-                    <li><a href="{{route('index.dosen')}}"> List Dosen</a></li>
-                    <li class="active">Update Data Dosen</li>
-                @elseif($user->role == 'mahasiswa')
-                    <li><a href="{{route('index.mahasiswa')}}"> List Mahasiswa</a></li>
-                    <li class="active">Update Data Mahasiswa</li>
-                @endif
+                <li class="active">Update Profil</li>
             </ol>
         </section>
 
@@ -32,7 +26,7 @@
                                 <h3 class="box-title">Update Data Mahasiswa</h3>
                             @endif
                         </div>
-                        <form role="form" action="{{route('user.update', ['username' => $user->username])}}" method="post" enctype="multipart/form-data">
+                        <form role="form" action="" method="post" enctype="multipart/form-data">
                             {{csrf_field()}}
                             <div class="box-body">
                                 <div class="form-group">
@@ -51,23 +45,10 @@
                                     <label>Password</label>
                                     <input type="password" name="password" class="form-control" placeholder="Password Baru">
                                 </div>
-                                @if($user->role == 'mahasiswa')
-                                    <div class="form-group">
-                                        <label>Dosen Wali</label>
-                                        <select name="guardian_id" class="form-control">
-                                            <option value="{{$user->guardian_id}}">{{$user->parent->name}}</option>
-                                            @foreach($guardians as $guardian)
-                                                @if($guardian->id != $user->parent->id)
-                                                    <option value="{{$guardian->id}}">{{$guardian->name}}</option>
-                                                @endif
-                                            @endforeach
-                                        </select>
-                                    </div>
-                                @endif
                             </div>
                             <div class="box-footer">
                                 <button type="submit" class="btn btn-primary">Update</button>
-                                {{--<a href="{{route('user.edit.password', ['username' => $user->password])}}" class="btn btn-primary">Ganti Password</a>--}}
+                                {{--<a href="{{route('user.edit.password', ['username' => $user->username])}}" class="btn btn-primary">Ganti Password</a>--}}
                             </div>
                         </form>
                     </div>
